@@ -23,6 +23,11 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .ace_editor {
+          min-height:50vh;
+        }
+
     </style>
 </head>
 <body id="app-layout">
