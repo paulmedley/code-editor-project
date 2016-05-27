@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::auth();
+Route::group(['middleware' => ['web']], function () {
+  Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index');
-Route::resource('code', 'CodeController@store');
+  Route::post('code', 'CodeController@store');
+  Route::resource('lesson', 'lessonController');
+});

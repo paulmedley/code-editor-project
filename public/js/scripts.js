@@ -21,9 +21,12 @@ $(function() {
 
   $("#button-save").click(function(){
     $.ajax({
-      url: 'code',
+      url: '/code',
       type: "post",
-      data: {data: editor.getValue()},
+      data: {
+        lesson_id: $("input[name='lesson_id']").val(),
+        data: editor.getValue()
+      },
       success: function(data){
         $("#response").html(data);
       }

@@ -8,38 +8,36 @@ use App\Http\Requests;
 use Storage;
 use Auth;
 use Carbon\Carbon;
-
+use App\Http\Requests\StoreCodeRequest;
 
 
 class CodeController extends Controller
 {
-    public function store(Request $request)
-    {
-      $allowedCommands = [
-          'character.move.up',
-          'character.move.down',
-          'character.move.left',
-          'character.move.right',
-          'character.speak.{message}',
-      ];
-      $parsedCommands = [];
+  public function store(StoreCodeRequest $request)
+  {
+    $allowedCommands = [
+        'character.move.up',
+        'character.move.down',
+        'character.move.left',
+        'character.move.right',
+        'character.speak.{message}',
+    ];
+    $parsedCommands = [];
+    $path = "pythonCode/".Auth::user()->email."/lesson/". $request->lesson_id;
+    $fullPath = storage_path("app/{$path}");
 
-      $code = $request->data;
-      $path = "pythonCode/".Auth::user()->email."/".Carbon::now()->timestamp;
-      $fullPath = storage_path("app/{$path}");
+    Storage::put("{$path}/input.py", $request->data);
 
-      Storage::put("{$path}/input.py", $code);
+    exec("python {$fullPath}/input.py", $output);
+    Storage::put("{$path}/output.py", serialize($output));
+    $outputFile = unserialize(Storage::get("{$path}/output.py"));
 
-      exec("python {$fullPath}/input.py", $output);
-      Storage::put("{$path}/output.py", serialize($output));
-      $outputFile = unserialize(Storage::get("{$path}/output.py"));
-
-      foreach ($outputFile as $line) {
-        if (in_array($line, $allowedCommands)){
-          $parsedCommands[] = $line;
-        }
+    foreach ($outputFile as $line) {
+      if (in_array($line, $allowedCommands)){
+        $parsedCommands[] = $line;
       }
-
-      return json_encode($parsedCommands);
     }
+
+    return json_encode($parsedCommands);
+  }
 }
