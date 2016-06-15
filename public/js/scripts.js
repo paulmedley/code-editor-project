@@ -28,6 +28,7 @@ $(function() {
         data: editor.getValue()
       },
       success: function(data){
+        //This code runs after the python code has been validated. Data is the list of commands.
         $("#response").html(data);
       }
     });

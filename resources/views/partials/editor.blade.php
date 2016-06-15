@@ -11,6 +11,7 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Output</div>
+        {{-- Here is where the game should go --}}
         <div id="response"></div>
       </div>
     </div>
