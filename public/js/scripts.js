@@ -5,7 +5,10 @@ $(function() {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+        
 });
+
+
 
   //Initialise Ace editor
   var editor = ace.edit("editor");
