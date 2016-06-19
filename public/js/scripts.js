@@ -32,9 +32,47 @@ $(function() {
       },
       success: function(data){
         //This code runs after the python code has been validated. Data is the list of commands.
-        $("#response").html(data);
+        covertOutputToAPI(JSON.parse(data));
       }
     });
   });
+
+  function covertOutputToAPI (data) {
+    for(var i = 0; i < data.length; i++) {
+      var currentCommand = data[i];
+      switch (currentCommand) {
+        case "character.move.up":
+          characterMoveUp();
+          break;
+        case "character.move.down":
+          characterMoveDown();
+          break;
+        case "character.move.left":
+          characterMoveLeft();
+          break;
+        case "character.move.right":
+          characterMoveRight();
+          break;
+      }
+    }
+    $("#response").html(data);
+  }
+
+  function characterMoveUp() {
+    console.log("Move the character up");
+  }
+
+  function characterMoveDown() {
+    console.log("Move the character down");
+  }
+
+  function characterMoveLeft() {
+    console.log("Move the character left");
+  }
+
+  function characterMoveRight() {
+    console.log("Move the character right");
+  }
+
 
 });
