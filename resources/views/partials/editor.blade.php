@@ -12,35 +12,11 @@
       <div class="panel panel-default">
         <div class="panel-heading">Output</div>
         {{-- Here is where the game should go --}}
-        <div id="response"></div>
+        <div id="canvasArea"></div>
       </div>
     </div>
 </div>
-<script>
 
-  (function() {
-    //Initialization
-    gdjs.registerObjects();
-    gdjs.registerBehaviors();
-    gdjs.registerGlobalCallbacks();
-
-    var game = new gdjs.RuntimeGame(gdjs.projectData, {});
-
-    //Create a renderer
-    var canvasArea = document.getElementById("canvasArea");
-    game.createStandardCanvas(canvasArea);
-
-    //Bind keyboards/mouse/touch events
-    game.bindStandardEvents(window, document);
-
-    //Load all assets and start the game
-    game.loadAllAssets(onAssetsLoaded);
-    function onAssetsLoaded() {
-      game.startStandardGameLoop();
-    }
-  })();
-
-</script>
 <script src="{{ asset('js/game/libs/pixi.js') }}"></script>
 <script src="{{ asset('js/game/libs/jshashtable.js') }}"></script>
 <script src="{{ asset('js/game/libs/howler.min.js') }}"></script>
@@ -82,3 +58,28 @@
 <script src="{{ asset('js/game/code6.js') }}"></script>
 <script src="{{ asset('js/game/code7.js') }}"></script>
 <script src="{{ asset('js/game/data.js') }}"></script>
+<script>
+
+  (function() {
+    //Initialization
+    gdjs.registerObjects();
+    gdjs.registerBehaviors();
+    gdjs.registerGlobalCallbacks();
+
+    var game = new gdjs.RuntimeGame(gdjs.projectData, {});
+
+    //Create a renderer
+    var canvasArea = document.getElementById("canvasArea");
+    game.createStandardCanvas(canvasArea);
+
+    //Bind keyboards/mouse/touch events
+    game.bindStandardEvents(window, document);
+
+    //Load all assets and start the game
+    game.loadAllAssets(onAssetsLoaded);
+    function onAssetsLoaded() {
+      game.startStandardGameLoop();
+    }
+  })();
+
+</script>

@@ -29,6 +29,14 @@
           min-height:50vh;
         }
 
+          #canvasArea {
+            min-height:50vh;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+          }
+
+
     </style>
 </head>
 <body id="app-layout">
